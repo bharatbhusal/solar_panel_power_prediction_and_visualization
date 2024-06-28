@@ -1,0 +1,2 @@
+# solar_panel_power_prediction_and_visualization
+College internship II project 
