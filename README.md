@@ -1,6 +1,6 @@
 # Solar Panel Power Prediction and Visualization
 
-Welcome to the Solar Panel Power Prediction and Visualization project repository! This project focuses on predicting the power output of solar panels based on module temperature data using machine learning techniques. Here's a detailed guide on setting up the environment, running the project, visualizing data, evaluating the model, and more.
+Welcome to the Solar Panel Power Prediction and Visualization project repository! This project focuses on predicting the power output of solar panels based on module temperature data using machine learning techniques. Here's a detailed guide on setting up the environment, running the project, visualizing data, evaluating the model, and testing the project.
 
 ## Overview
 
@@ -8,11 +8,13 @@ The project includes data preprocessing, model training using TensorFlow/Keras, 
 
 ## Project Structure
 
-- `dataset.csv`: Dataset containing solar panel data including module temperature and DC power.
-- `solar_power_prediction.py`: Python script for data preprocessing, model creation, training, and prediction.
+- `data/dataset.csv`: Dataset containing solar panel data including module temperature and DC power.
+- `src/`: Independent Scripts to perform specific operations.
+- `main.py`: Python script for data preprocessing, model creation, training, prediction and visualization.
 - `README.md`: This file, providing an overview of the project, setup instructions, and usage details.
 - `requirements.txt`: Python dependencies required to run the project.
 - `.gitignore`: Specifies files and directories that should be ignored by Git.
+- `tests/`: Directory containing unit tests for the project modules.
 
 ## Setting Up Your Environment
 
@@ -70,7 +72,7 @@ Using a virtual environment is recommended to manage dependencies and avoid conf
    Execute your Python script while the virtual environment is active:
 
    ```bash
-   python solar_power_prediction.py
+   python main.py
    ```
 
 6. **Deactivate the Virtual Environment:**
@@ -94,7 +96,7 @@ Using a virtual environment is recommended to manage dependencies and avoid conf
    Run the prediction script to start the process:
 
    ```bash
-   python solar_power_prediction.py
+   python main.py
    ```
 
 3. **Input Temperature Values:**
@@ -103,7 +105,7 @@ Using a virtual environment is recommended to manage dependencies and avoid conf
 
 ## Data Visualization
 
-Explore various plots generated using matplotlib in the `solar_power_prediction.py` script to visualize different aspects of the dataset:
+Explore various plots generated using matplotlib in the `main.py` script to visualize different aspects of the dataset:
 
 - Time vs. Temperature
 - Histogram of Temperature
@@ -116,6 +118,26 @@ Explore various plots generated using matplotlib in the `solar_power_prediction.
 ## Model Evaluation
 
 The model's performance is evaluated using metrics such as accuracy and a confusion matrix, providing insights into its effectiveness.
+
+## Testing the Project
+
+To ensure that the code is functioning as expected, you can run unit tests. These tests validate the functionality of various components of the project.
+
+1. **Navigate to the Tests Directory:**
+
+   ```bash
+   cd tests
+   ```
+
+2. **Run the Tests:**
+
+   Use the `unittest` framework to execute the test cases:
+
+   ```bash
+   python -m unittest discover
+   ```
+
+   This command will automatically discover and run all test cases in the `tests` directory.
 
 ## Future Improvements
 
