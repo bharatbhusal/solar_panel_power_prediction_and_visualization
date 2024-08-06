@@ -1,3 +1,4 @@
+import os
 from src.data_preprocessor import DataPreprocessor
 from src.model_builder import ModelBuilder
 from src.model_trainer import ModelTrainer
@@ -6,6 +7,8 @@ from src.predictor import Predictor
 from src.visualizer import Visualizer
 
 def main():
+    model_filepath = './data/saved_model.h5'  # Path to save/load the model
+
     try:
         # Data preprocessing
         preprocessor = DataPreprocessor(data_path='./data/dataset.csv')
@@ -15,12 +18,22 @@ def main():
 
         # Model building
         model_builder = ModelBuilder()
-        model_builder.build_model()
-        model_builder.compile_model()  # Ensure model is compiled
+        if os.path.exists(model_filepath):
+            # Load the pre-trained model if it exists
+            model_builder.model = ModelTrainer.load_model(model_filepath, preprocessor.x_train, preprocessor.y_train).model
+            print("Loaded pre-trained model.")
+        else:
+            # Build and compile a new model
+            model_builder.build_model()
+            model_builder.compile_model()  # Ensure model is compiled
 
         # Model training
         trainer = ModelTrainer(model=model_builder.model, x_train=preprocessor.x_train, y_train=preprocessor.y_train)
-        trainer.train_model()
+        if not os.path.exists(model_filepath):
+            # Train the model and save it if it does not already exist
+            trainer.train_model(epochs=500)
+            trainer.save_model(model_filepath)
+            print("Trained and saved new model.")
 
         # Model evaluation
         evaluator = ModelEvaluator(model=model_builder.model, x_test=preprocessor.x_test, y_test=preprocessor.y_test)

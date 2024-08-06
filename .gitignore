@@ -105,3 +105,7 @@ venv.bak/
 
 # Pyre type checker
 .pyre/
+
+
+# model
+*/saved_model.h5

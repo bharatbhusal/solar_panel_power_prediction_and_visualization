@@ -39,5 +39,5 @@ class Predictor:
         power = y_pred[0, 0]
 
         # Print and return the predicted power
-        print(f"The expected Power from the solar panel for the corresponding temperature is: {power}")
+        print(f"The expected Power from the solar panel for the corresponding temperature is: {power} watts.")
         return power

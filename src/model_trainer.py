@@ -1,3 +1,6 @@
+import os
+from tensorflow.keras.models import load_model
+
 class ModelTrainer:
     """
     A class to train a neural network model.
@@ -21,14 +24,14 @@ class ModelTrainer:
         self.x_train = x_train
         self.y_train = y_train
 
-    def train_model(self, epochs=200):
+    def train_model(self, epochs=5000):
         """
         Trains the model using the provided training data.
 
         The method fits the model to the training data for a specified number of epochs.
 
         Parameters:
-            epochs (int): The number of epochs to train the model. Default is 200.
+            epochs (int): The number of epochs to train the model. Default is 5000.
 
         Returns:
             History: The training history object containing details about the training process.
@@ -38,3 +41,28 @@ class ModelTrainer:
 
         # Return the training history
         return history
+
+    def save_model(self, filepath):
+        """
+        Saves the trained model to the specified file path.
+
+        Parameters:
+            filepath (str): The file path to save the trained model.
+        """
+        self.model.save(filepath)
+
+    @classmethod
+    def load_model(cls, filepath, x_train, y_train):
+        """
+        Loads a model from the specified file path and returns an instance of ModelTrainer.
+
+        Parameters:
+            filepath (str): The file path from which to load the model.
+            x_train (DataFrame or ndarray): Features of the training dataset.
+            y_train (Series or ndarray): Target values of the training dataset.
+
+        Returns:
+            ModelTrainer: An instance of ModelTrainer with the loaded model and training data.
+        """
+        model = load_model(filepath)
+        return cls(model, x_train, y_train)
