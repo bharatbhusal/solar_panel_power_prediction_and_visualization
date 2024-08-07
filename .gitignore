@@ -108,4 +108,4 @@ venv.bak/
 
 
 # model
-*/saved_model.h5
+*/saved_model.keras

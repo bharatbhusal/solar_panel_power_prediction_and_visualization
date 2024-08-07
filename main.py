@@ -7,7 +7,7 @@ from src.predictor import Predictor
 from src.visualizer import Visualizer
 
 def main():
-    model_filepath = './data/saved_model.h5'  # Path to save/load the model
+    model_filepath = './data/saved_model.keras'  # Updated path to use the Keras format
 
     try:
         # Data preprocessing
@@ -30,7 +30,7 @@ def main():
         # Model training
         trainer = ModelTrainer(model=model_builder.model, x_train=preprocessor.x_train, y_train=preprocessor.y_train)
         if not os.path.exists(model_filepath):
-            # Train the model and save it if it does not already exist
+            # Train the model and save it, overwriting if it already exists
             trainer.train_model(epochs=500)
             trainer.save_model(model_filepath)
             print("Trained and saved new model.")

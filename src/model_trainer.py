@@ -44,11 +44,13 @@ class ModelTrainer:
 
     def save_model(self, filepath):
         """
-        Saves the trained model to the specified file path.
+        Saves the trained model to the specified file path using the native Keras format.
 
         Parameters:
-            filepath (str): The file path to save the trained model.
+            filepath (str): The file path to save the trained model. Should end with '.keras'.
         """
+        if not filepath.endswith('.keras'):
+            raise ValueError("The file path must end with '.keras'.")
         self.model.save(filepath)
 
     @classmethod
@@ -57,12 +59,14 @@ class ModelTrainer:
         Loads a model from the specified file path and returns an instance of ModelTrainer.
 
         Parameters:
-            filepath (str): The file path from which to load the model.
+            filepath (str): The file path from which to load the model. Should end with '.keras'.
             x_train (DataFrame or ndarray): Features of the training dataset.
             y_train (Series or ndarray): Target values of the training dataset.
 
         Returns:
             ModelTrainer: An instance of ModelTrainer with the loaded model and training data.
         """
-        model = load_model(filepath)
+        if not filepath.endswith('.keras'):
+            raise ValueError("The file path must end with '.keras'.")
+        model = load_model(filepath, compile=False)
         return cls(model, x_train, y_train)
