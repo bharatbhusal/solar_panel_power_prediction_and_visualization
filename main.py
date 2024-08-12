@@ -53,7 +53,10 @@ def main():
         predictor = Predictor(model=model_builder.model)
         try:
             temperature = float(input("Please give the Temperature value: "))
-            predictor.predict(temperature)
+            predicted_power = predictor.predict(temperature)
+            visualizer.plot_temperature_vs_dc_power_with_prediction(temperature,predicted_power)
+            visualizer.plot_temperature_vs_dc_power_bar_with_prediction(temperature,predicted_power)
+            visualizer.plot_dc_power_histogram_with_prediction(predicted_power)
         except ValueError:
             print("Invalid temperature value. Please enter a numeric value.")
 

@@ -130,3 +130,136 @@ class Visualizer:
         plt.grid(True)
         plt.tight_layout()
         plt.show()
+    
+    def plot_temperature_vs_dc_power_with_prediction(self, predicted_temperature, predicted_power):
+        """
+        Plots a line graph of Temperature vs DC Power and highlights the predicted power output.
+
+        Displays the relationship between module temperature and DC power using a line graph,
+        and marks the predicted power output for a given temperature.
+
+        Parameters:
+            predicted_temperature (float): The temperature value used for prediction.
+            predicted_power (float): The predicted DC power output corresponding to the temperature.
+        """
+        plt.figure(figsize=(15, 8))
+        plt.title("Line Plot Graph (Temperature vs DC Power)", fontsize=20)
+        plt.xlabel("Module Temperature", fontsize=15)
+        plt.ylabel("DC Power", fontsize=15)
+        
+        # Plot the relationship between temperature and DC power
+        plt.plot(self.data_sample['MODULE_TEMPERATURE'], self.data_sample['DC_POWER'], 
+                label="Temperature vs DC Power", color="red", lw=2)
+        
+        # Highlight the predicted point
+        plt.scatter(predicted_temperature, predicted_power, 
+                    color='blue', s=200, marker='o', label=f"Predicted Power: {predicted_power:.2f}W")
+        
+        # Add the predicted point annotation
+        plt.annotate(f"Predicted Power: {predicted_power:.2f}W", 
+                    xy=(predicted_temperature, predicted_power), 
+                    xytext=(predicted_temperature + 1, predicted_power + 50),
+                    arrowprops=dict(facecolor='black', shrink=0.05),
+                    fontsize=12, color='blue')
+        
+        plt.xticks(rotation=45, ha='right')
+        plt.legend(loc='best')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+    def plot_scatter_temperature_vs_dc_power_with_prediction(self, predicted_temperature, predicted_power):
+        """
+        Plots a scatter plot of Temperature vs DC Power and highlights the predicted power output.
+
+        Displays the relationship between module temperature and DC power using a scatter plot,
+        and marks the predicted power output for a given temperature.
+
+        Parameters:
+            predicted_temperature (float): The temperature value used for prediction.
+            predicted_power (float): The predicted DC power output corresponding to the temperature.
+        """
+        plt.figure(figsize=(15, 8))
+        plt.title("Scatter Plot (Temperature vs DC Power)", fontsize=20)
+        plt.xlabel("Module Temperature", fontsize=15)
+        plt.ylabel("DC Power", fontsize=15)
+        
+        # Scatter plot for the existing data
+        plt.scatter(self.data_sample['MODULE_TEMPERATURE'], self.data_sample['DC_POWER'], 
+                    label="Actual Data", color="skyblue", s=100, marker='o')
+        
+        # Highlight the predicted point
+        plt.scatter(predicted_temperature, predicted_power, 
+                    color='red', s=200, marker='*', label=f"Predicted Power: {predicted_power:.2f}W")
+        
+        # Add annotation for the predicted point
+        plt.annotate(f"Predicted Power: {predicted_power:.2f}W", 
+                    xy=(predicted_temperature, predicted_power), 
+                    xytext=(predicted_temperature + 1, predicted_power + 50),
+                    arrowprops=dict(facecolor='black', shrink=0.05),
+                    fontsize=12, color='red')
+        
+        plt.legend(loc='best')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+    def plot_dc_power_histogram_with_prediction(self, predicted_power):
+        """
+        Plots a histogram of DC Power and adds a vertical line for the predicted power output.
+
+        Displays the distribution of DC power generated using a histogram and marks the
+        predicted power output for the given temperature.
+
+        Parameters:
+            predicted_power (float): The predicted DC power output.
+        """
+        plt.figure(figsize=(15, 8))
+        plt.title("Histogram of DC Power with Predicted Power", fontsize=20)
+        plt.xlabel("DC Power", fontsize=15)
+        plt.ylabel("Frequency", fontsize=15)
+        
+        # Histogram for the existing data
+        plt.hist(self.data_sample['DC_POWER'], rwidth=0.9, color='skyblue', edgecolor='black')
+        
+        # Add a vertical line for the predicted power
+        plt.axvline(predicted_power, color='red', linestyle='dashed', linewidth=2, label=f"Predicted Power: {predicted_power:.2f}W")
+        
+        plt.legend(loc='best')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()
+
+    def plot_temperature_vs_dc_power_bar_with_prediction(self, predicted_temperature, predicted_power):
+        """
+        Plots a bar chart of Temperature vs DC Power and highlights the predicted power output.
+
+        Displays the DC power generated based on module temperature using a bar chart,
+        and marks the predicted power output for a given temperature.
+
+        Parameters:
+            predicted_temperature (float): The temperature value used for prediction.
+            predicted_power (float): The predicted DC power output corresponding to the temperature.
+        """
+        plt.figure(figsize=(15, 8))
+        plt.title("Temperature vs DC Power with Predicted Power", fontsize=20)
+        plt.xlabel("Module Temperature", fontsize=15)
+        plt.ylabel("DC Power", fontsize=15)
+        
+        # Highlight the predicted bar
+        colors = ['red' if temp == predicted_temperature else 'orange' for temp in self.data_sample['MODULE_TEMPERATURE']]
+        
+        # Plot the bar chart
+        plt.bar(self.data_sample['MODULE_TEMPERATURE'], self.data_sample['DC_POWER'], color=colors, lw=5)
+        
+        # Add an annotation for the predicted point
+        plt.annotate(f"Predicted Power: {predicted_power:.2f}W", 
+                    xy=(predicted_temperature, predicted_power), 
+                    xytext=(predicted_temperature + 1, predicted_power + 50),
+                    arrowprops=dict(facecolor='black', shrink=0.05),
+                    fontsize=12, color='red')
+        
+        plt.xticks(rotation=45, ha='right')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.show()

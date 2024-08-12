@@ -109,3 +109,4 @@ venv.bak/
 
 # model
 */saved_model.keras
+*/test_saved_model.keras
